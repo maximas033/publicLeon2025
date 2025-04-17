@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- CONNECT IT TO CSS -->
+    <link rel="stylesheet" href="/FRONTEND/Style/index.css" />
+    <link rel="stylesheet" href="/FRONTEND/Style/leonlogo.css" />
+    <link rel="stylesheet" href="/FRONTEND/Style/animations.css" />
+    <!-- CONNECT IT TO FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-firestore.js"></script>
+    <!-- MEDIAPIE -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils"></script>
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    
+
+    <!-- SPEECH RECOGNITION-->
+    <script src="/BACKEND/SpeechRecognition/SpeechRecognition.js"></script>
+
+    <style>
+      #positionHeading {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: transform 0.1s linear;
+        font-size: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Display Time -->
+    <section class="CurrentTime" id="topInformation">
+      <div>
+        <h3 id="DisplayGreeting"></h3>
+      </div>
+      <div>
+        <h4 id="DisplayCurrentTime"></h4>
+      </div>
+      <div>
+        <h6 id="DisplayCurrentDay"></h6>
+      </div>
+    </section>
+
+    <!-- THIS IS THE LOGO, IT ILL BE ALL THE WAY AT THE BOTTOM-->
+    <section class="center" id="centerPiece">
+      <div class="circleOuter" id="circleOuter"></div>
+      <div class="circle1" id="circle1">
+        <div class="circle2" id="circle2">
+          <div class="circle3" id="circle3">
+            <h3 id="name">L E O N</h3>
+          </div>
+          <div class="circleOuter1" id="circleOuter1"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCKDOWN LOCKDOWN MESSAGE -->
+    <section id="LeonLockdownMessage" onclick="LeonUnlockLeon()">
+        <div>
+            <h3>LEON IS UNDER A LOCKDOWN</h3>
+         </div>
+    </section>
+
+    <section class="display_battery">
+      <div id="batteryStatus">Calculating...</div>
+      <div id="chargingStatus"></div>
+      <div id="warningLowBattery"></div>
+    </section>
+
+
+    <section id="globe">
+      <div id="globeViz">
+
+      </div>
+    </section>
+
+
+    <section id="onlineStatus">
+      <div id="displayOnlineStats"></div>
+    </section>
+
+    <section class="transcript_responce">
+      <div>
+        <p id="transcript"></p>
+        <p id="response"></p>
+      </div>
+    </section>
+
+    <section class="testing" id="testingWidget">
+      <div class="testingWarning">
+        <h5>W A R N I N G</h5>
+        <h4>TESTING IN PROGRESS  // V1.0</h4>
+      </div>
+      <div class="bottom">
+        <p>#0002134678 TFFC:3 /////////////</p>
+      </div>
+    </section>
+
+    <section>
+      <canvas id="compassCanvas"></canvas>
+    </section>
+
+
+    <section id="systemControlInformation">
+      <h4>S Y S T E M_I N F O R M A T I O N</h4>
+      <div id="systemReport">
+
+      </div>
+    </section>
+
+
+    <section class="ipAdress" id="ipAdress">
+      <div class="ipAdressHeading">
+        <h3><spam class="bolder">IP</spam> PUBLIC</h3>
+      </div>
+      <div>
+        <h2 id="publicIpAdress"></h2>
+      </div>
+      <!-- number the div  -->
+       <div class="bottom">
+        <p>/// LEO\\\32S.N/..IP\\&VDQR</p>
+       </div>
+    </section>
+
+    
+
+    <script src="/BACKEND/index.js"></script>
+    <script src="/BACKEND/firebaseconnection.js"></script>
+    <script src="/BACKEND/leonFunctions.js"></script>
+    <script src="/BACKEND/leonOnLoad.js"></script>
+    <!-- MOVABLE WIDGETS JS FILES -->
+    <script src="/BACKEND/MovableWidgets/movableIpAdress.js"></script>
+    <script src="/BACKEND/MovableWidgets/movableWarning.js"></script>
+
+
+
+
+    <!-- IP ADRESS -->
+     <script>
+      function getPublicIP() {
+        fetch('https://api.ipify.org?format=json')
+          .then(response => response.json())
+          .then(data => {
+            const ipParts = data.ip.split('.');
+            // remove the seperator
+            const ipAdress = ipParts.join('');
+            document.getElementById('publicIpAdress').textContent = ipAdress;
+            const styledIp = ipParts.map(part => `<span class="ip-box">${part}</span>`).join('');
+            document.getElementById("publicIpAdress").innerHTML = styledIp;
+          })
+          .catch(err => {
+            document.getElementById('publicIpAdress').innerText = '⚠️ Unable to retrieve IP address.';
+            console.error(err);
+          });
+      }
+    
+      window.onload = function () {
+        getSystemReport();
+        getPublicIP();
+      };
+     </script>
+
+
+
+
+    <!-- GLOBE THREE JS -->
+    <script src="//cdn.jsdelivr.net/npm/globe.gl"></script>
+    <script type="module">
+      import { MeshLambertMaterial, DoubleSide } from 'https://esm.sh/three';
+      import * as topojson from 'https://esm.sh/topojson-client';
+      const myLocation = {
+        lat: 45.523,
+        lng: -122.676,
+        size: 1,
+        color: 'red'
+      };
+      const world = new Globe(document.getElementById('globeViz'))
+        .pointsData([myLocation])
+        .pointAltitude(0.01)
+        .pointColor(d => d.color)
+        .pointRadius(d => d.size)
+        .backgroundColor('rgba(0,0,0,0)')
+        .showGlobe(false)
+        .showAtmosphere(true);
+    
+      fetch('//cdn.jsdelivr.net/npm/world-atlas/land-110m.json')
+        .then(res => res.json())
+        .then(landTopo => {
+          world
+            .polygonsData(topojson.feature(landTopo, landTopo.objects.land).features)
+            .polygonCapMaterial(new MeshLambertMaterial({ color: '#0077c9', side: DoubleSide }))
+            .polygonSideColor(() => 'rgba(0,0,0,0)');
+    
+          world.controls().autoRotate = true;
+          world.controls().autoRotateSpeed = 0.6;
+          world.showGraticules(true);
+          world.controls().enableZoom = false;
+    
+          // Animate the camera to a tilted side view
+          const targetView = {
+            lat: 40,
+            lng: -100,
+            altitude: 7
+          };
+    
+          world.pointOfView({ lat: 0, lng: 0, altitude: 10 }, 0); // Start far away
+          setTimeout(() => {
+            world.pointOfView(targetView, 2000); // Smooth transition
+          }, 100); // Give a tiny delay after load
+        });
+    </script>
+
+  </body>
+</html>
