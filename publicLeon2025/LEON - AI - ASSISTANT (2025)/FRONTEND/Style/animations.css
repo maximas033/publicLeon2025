@@ -1,0 +1,106 @@
+/* blink animation */
+@keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    20% {
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    40%{
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 0;
+    }
+    70% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 0;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+
+@keyframes sciFiAnimation {
+    0% {
+      position: absolute;
+      bottom: 0%;
+      opacity: 0;
+    }
+    30% {
+      position: absolute;
+      bottom: 2.5%;
+      opacity: 0.50;
+    }
+    60% {
+      position: absolute;
+      bottom: 3.5%;
+      opacity: 0.75;
+    }
+    100% {
+      position: absolute;
+      bottom: 4.5%;
+      opacity: 1;
+    }
+}
+  
+@keyframes sciFiAnimation2 {
+  0% {
+    position: absolute;
+    top: 0%;
+    opacity: 0;
+  }
+  30% {
+    position: absolute;
+    top: 0.5%;
+    opacity: 1;
+  }
+  60% {
+    position: absolute;
+    top: 0.5%;
+    opacity: 0;
+  }
+  100% {
+    position: absolute;
+    top: 1%;
+    opacity: 1;
+  }
+}
+
+@keyframes sciFiAnimation3 {
+  0% {
+    position: absolute;
+    bottom: 0%;
+    opacity: 0;
+  }
+  30% {
+    position: absolute;
+    bottom: 2.5%;
+    opacity: 1;
+  }
+  60% {
+    position: absolute;
+    bottom: 3.5%;
+    opacity: 0;
+  }
+  100% {
+    position: absolute;
+    bottom: 4.5%;
+    opacity: 1;
+  }
+}

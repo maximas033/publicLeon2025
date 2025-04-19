@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- CONNECT IT TO CSS -->
+    <link rel="stylesheet" href="/FRONTEND/style/settings.css" />
+    <link rel="stylesheet" href="/FRONTEND/style/index.css" />
+    <!-- <link rel="stylesheet" href="/FRONTEND/style/dashboard.css" /> -->
+    <link rel="stylesheet" href="/FRONTEND/style/leonlogo.css" />
+    <link rel="stylesheet" href="/FRONTEND/style/animations.css" />
+    <!-- CONNECT IT TO FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+  </head>
+  <body>
+
+    <!-- THIS IS THE LOGO, IT ILL BE ALL THE WAY AT THE BOTTOM-->
+    <section class="center" id="centerPiece">
+        <div class="circleOuter" id="circleOuter"></div>
+        <div class="circle1" id="circle1">
+          <div class="circle2" id="circle2">
+            <div class="circle3" id="circle3">
+              <h3 id="name">L E O N</h3>
+            </div>
+            <div class="circleOuter1" id="circleOuter1"></div>
+          </div>
+        </div>
+      </section>
+  
+          <!-- LOCKDOWN MESSAGE -->
+    <section id="LeonLockdownMessageSettings">
+      <div>
+        <h3>LEON IS UNDER A LOCKDOWN</h3>
+        <p>Functions are limited</p>
+      </div>
+    </section>
+
+    <section id="Dashboardheading">
+      <h2>S E T T I N G S</h2>
+    </section>
+
+    <section class="bottomButtons">
+      <button class="borderBoxDanger" onclick="startLockdown()" id="lockdownButton">
+        L O C K D O W N
+      </button>
+
+      <button class="borderBoxRegular" id="lockdownButton">
+        DARK MODE OFF
+      </button>
+    </section>
+
+
+    <script src="/BACKEND/firebaseconnection.js"></script>
+    <script src="/BACKEND/leonFunctions.js"></script>
+    <script src="/BACKEND/leonOnLoadSettings.js"></script>
+    <!-- <script src="LeonFirebase/LeonFirebase.js"></script>
+    <script src="LEONJSFILES/LeonOnLoad.js"></script>
+    <script src="LEONJSFILES/LeonLockdown.js"></script>
+    <script src="LEONJSFILES/LeonUnlock.js"></script>
+    <script src="LEONJSFILES/RedirectLeon.js"></script> -->
+  </body>
+</html>

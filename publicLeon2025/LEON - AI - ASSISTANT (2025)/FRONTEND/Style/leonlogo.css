@@ -1,0 +1,159 @@
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+  
+  .circle1{
+    border-radius: 50%;
+    width: 100px;   /* Reduced from 150px */
+    height: 100px;  /* Reduced from 150px */
+    background-color: #01314c71;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    animation: pulse 3s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transform: rotate(45deg);
+    filter: drop-shadow(0 0 10px #0077c9);
+}
+  
+  .circle2 {
+    border-radius: 50%;
+    width: 90px;    /* Reduced from 130px */
+    height: 90px;   /* Reduced from 130px */
+    background-color: #0079c900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    animation: pulse 3s ease-in-out infinite;
+    animation-delay: -1.2s;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transform: rotate(45deg) translate(-50px, 50px);
+    border: 1px solid white;
+  }
+  
+  .circle3{
+    border-radius: 50%;
+    width: 80px;    /* Reduced from 110px */
+    height: 80px;   /* Reduced from 110px */
+    background-color: #002439;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    animation: pulse 5s ease-in-out infinite;
+    animation-delay: -3s;
+    filter: drop-shadow(0 0 10px #0077c9);
+}
+  
+  #circleOuter{
+    border-radius: 100%;
+    width: 130px;   /* Reduced from 190px */
+    height: 130px;  /* Reduced from 190px */
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid white;
+    position: relative;
+    transform: rotate(-180deg);
+    animation: rotate-counter 5s infinite;
+    animation-direction: alternate;
+    -webkit-mask: linear-gradient(
+      to left,
+      transparent 50%,
+      rgb(255, 255, 255) 50%
+    );
+    mask: linear-gradient(to left, transparent 50%, rgb(255, 255, 255) 50%);
+    display: none;
+}
+  
+  #circleOuter1{
+    border-radius: 100%;
+    width: 70px;    /* Reduced from 100px */
+    height: 70px;   /* Reduced from 100px */
+    background-color: rgba(255, 255, 255, 0);
+    border: 1px solid white;
+    position: relative;
+    transform: rotate(-180deg);
+    animation: rotate 5s infinite;
+    animation-direction: alternate;
+    -webkit-mask: linear-gradient(
+      to left,
+      transparent 50%,
+      rgb(255, 255, 255) 50%
+    );
+    mask: linear-gradient(to left, transparent 50%, rgb(255, 255, 255) 50%);
+    display: none;
+}
+
+#name{
+    color: white;
+    font-size: small;
+    font-weight: 100;
+}
+  
+@keyframes rotate-counter{
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(-180deg);
+    }
+}
+  
+@keyframes rotate-counter1{
+    from {
+      transform: rotate(-180deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+}
+  
+h3{
+    color: white;
+    font-size: 32px;
+}
+  
+@keyframes rotate-clock{
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
+  
+@keyframes pulse{
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+}
+  
+@keyframes rotate{
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    80% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(-360deg);
+    }
+}
